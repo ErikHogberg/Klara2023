@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -15,14 +16,28 @@ public class PlayerInput : MonoBehaviour
     public float gravityForce = 9.82f;
     public float jumpStrength = 7f;
 
+    [Space]
+    public float TurnSpeed = 1f;
+
     //Other variables
     float storedVelocityY = 0f;
+
+    // events
+    [Space]
+    public UnityEvent OnMove;
+    public UnityEvent OnStop;
+    public UnityEvent OnJump;
+    public UnityEvent OnLand;
 
     // Start is called before the first frame update
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
     }
+
+    bool wasMoving = false;
+    bool wasGrounded = false;
+    float targetAngle = 0;
 
     // Update is called once per frame
     void Update()
@@ -33,11 +48,31 @@ public class PlayerInput : MonoBehaviour
         moveDirection.x = Input.GetAxis("Horizontal") * walkSpeed;
         moveDirection.z = Input.GetAxis("Vertical") * walkSpeed;
 
+        bool isMoving = moveDirection.sqrMagnitude > float.Epsilon;
+
+        if (isMoving != wasMoving)
+        {
+            wasMoving = isMoving;
+
+            if (isMoving) OnMove.Invoke();
+            else OnStop.Invoke();
+        }
+
         //Jump or gravity
         if (_characterController.isGrounded)
+        {
             storedVelocityY = Input.GetButtonDown("Jump") ? jumpStrength : GROUNDEDDOWNFORCE;
+            OnJump.Invoke();
+            wasGrounded = false;
+        }
         else
+        {
             storedVelocityY -= gravityForce * Time.deltaTime;
+            if(!wasGrounded){
+                wasGrounded = true;
+                OnLand.Invoke();
+            }
+        }
 
         moveDirection.y = storedVelocityY;
 
