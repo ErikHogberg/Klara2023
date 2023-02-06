@@ -1731,6 +1731,7 @@ GameObject:
   - component: {fileID: 1561236632}
   - component: {fileID: 1561236633}
   - component: {fileID: 1561236634}
+  - component: {fileID: 1561236635}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1912,7 +1913,19 @@ MonoBehaviour:
       m_Calls: []
   OnLand:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1561236635}
+        m_TargetAssemblyTypeName: DebugHelper, Assembly-CSharp
+        m_MethodName: Log
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1561236633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1967,6 +1980,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.3879967, y: 2, z: 3.2731273}
   m_Center: {x: -1.6939983, y: 0, z: 1.1365637}
+--- !u!114 &1561236635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561236626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c722e41023c940945bd107c6ed13ae14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1575442433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9165120810570637169, guid: 31572358dd9c64b43829f6eb6be30f1f, type: 3}
