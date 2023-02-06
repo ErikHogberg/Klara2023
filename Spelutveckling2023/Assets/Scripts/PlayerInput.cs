@@ -50,17 +50,18 @@ public class PlayerInput : MonoBehaviour
 
         bool isMoving = moveDirection.sqrMagnitude > float.Epsilon;
 
-        if (isMoving != wasMoving)
-        {
-            wasMoving = isMoving;
-
-            if (isMoving) OnMove.Invoke();
-            else OnStop.Invoke();
-        }
 
         //Jump or gravity
         if (_characterController.isGrounded)
         {
+            if (isMoving != wasMoving)
+            {
+                wasMoving = isMoving;
+
+                if (isMoving) OnMove.Invoke();
+                else OnStop.Invoke();
+            }
+
             bool jumped = Input.GetButtonDown("Jump");
             storedVelocityY = jumped ? jumpStrength : GROUNDEDDOWNFORCE;
 
@@ -72,6 +73,7 @@ public class PlayerInput : MonoBehaviour
 
             if (jumped)
             {
+                if(wasMoving) OnStop.Invoke();
                 wasGrounded = false;
                 OnJump.Invoke();
             }
