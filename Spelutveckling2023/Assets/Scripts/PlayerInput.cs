@@ -61,17 +61,24 @@ public class PlayerInput : MonoBehaviour
         //Jump or gravity
         if (_characterController.isGrounded)
         {
-            storedVelocityY = Input.GetButtonDown("Jump") ? jumpStrength : GROUNDEDDOWNFORCE;
-            OnJump.Invoke();
-            wasGrounded = false;
+            bool jumped = Input.GetButtonDown("Jump");
+            storedVelocityY = jumped ? jumpStrength : GROUNDEDDOWNFORCE;
+
+            if (!wasGrounded)
+            {
+                wasGrounded = true;
+                OnLand.Invoke();
+            }
+
+            if (jumped)
+            {
+                wasGrounded = false;
+                OnJump.Invoke();
+            }
         }
         else
         {
             storedVelocityY -= gravityForce * Time.deltaTime;
-            if(!wasGrounded){
-                wasGrounded = true;
-                OnLand.Invoke();
-            }
         }
 
         moveDirection.y = storedVelocityY;
