@@ -8,6 +8,7 @@ public class Health : MonoBehaviour, IDamage
 {
     public int HP = 3;
     public UnityEvent onFail = new UnityEvent();
+    public UnityEvent onHit; // <-- lägg till
     public Text healthNumberText = null;
 
     public void OnDamage(int dmg)
@@ -20,6 +21,8 @@ public class Health : MonoBehaviour, IDamage
             ScoreManager.canIncreaseScore = false;
             onFail.Invoke();
         }
+
+        onHit.Invoke(); // <-- lägg till
     }
 
     private void UpdateText()

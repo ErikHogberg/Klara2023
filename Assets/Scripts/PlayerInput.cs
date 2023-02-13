@@ -29,6 +29,8 @@ public class PlayerInput : MonoBehaviour
     public UnityEvent OnJump;
     public UnityEvent OnLand;
 
+    public UnityEvent OnAttack;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,14 +44,28 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 moveDirection = Vector3.zero;
+        // lägg till under
+        if (Input.GetKeyDown("e"))
+        {
+            Debug.Log("e");
+            OnAttack.Invoke();
+        }
+		// lägg till ovan
+
+		Vector3 moveDirection = Vector3.zero;
 
         //Basic walk input
         moveDirection.x = Input.GetAxis("Horizontal") * walkSpeed;
         moveDirection.z = Input.GetAxis("Vertical") * walkSpeed;
 
-        bool isMoving = moveDirection.sqrMagnitude > float.Epsilon;
+        if (moveDirection.sqrMagnitude > 0)
+        {
+            float signedAngle = Vector3.SignedAngle(Vector3.forward, moveDirection, Vector3.up);
+            targetAngle = Mathf.MoveTowards(targetAngle, signedAngle, TurnSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.AngleAxis(targetAngle, Vector3.up);
+        }
 
+        bool isMoving = moveDirection.sqrMagnitude > float.Epsilon;
 
         //Jump or gravity
         if (_characterController.isGrounded)
@@ -73,7 +89,7 @@ public class PlayerInput : MonoBehaviour
 
             if (jumped)
             {
-                if(wasMoving) OnStop.Invoke();
+                if (wasMoving) OnStop.Invoke();
                 wasGrounded = false;
                 OnJump.Invoke();
             }
@@ -87,6 +103,7 @@ public class PlayerInput : MonoBehaviour
 
         //Apply movement
         _characterController.Move(moveDirection * Time.deltaTime);
+
 
         if (Input.GetButtonDown("Cancel"))
             Application.Quit();
