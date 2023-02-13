@@ -13,12 +13,16 @@ public class Health : MonoBehaviour, IDamage
 
     public void OnDamage(int dmg)
     {
-        HP -= dmg;
-        UpdateText();
+        // detta sker varje gång skada tas
+
+        HP -= dmg; // hp subtraheras
+        UpdateText(); // text uppdateras
         if (HP <= 0)
         {
+            // här inne sker saker när hp tar slut
             ObjectSpawner.active = false;
             ScoreManager.canIncreaseScore = false;
+
             onFail.Invoke();
         }
 
@@ -44,6 +48,7 @@ public class Health : MonoBehaviour, IDamage
     {
         if (transform.position.y < -2)
         {
+            // spelaren dör om de faller under -2 i position
             HP = 0;
             UpdateText();
             ObjectSpawner.active = false;
