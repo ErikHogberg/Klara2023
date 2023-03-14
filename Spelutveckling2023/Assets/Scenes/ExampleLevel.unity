@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 8166921}
   - component: {fileID: 8166920}
   - component: {fileID: 8166923}
+  - component: {fileID: 8166924}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -222,6 +223,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1561236626}
   cameraMoveThreshold: {x: 4, y: 3, z: 4}
+--- !u!114 &8166924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8166919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8586a47be0b66cd4a84016ff3da4b220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nummer: 0
+  flyttal: 0
+  text: 
+  OnHello:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &48089501
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +335,65 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 48089503}
+--- !u!1 &75546159 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8242896869549425741, guid: f38b275ceba676045bb3d32b8ae60f24, type: 3}
+  m_PrefabInstance: {fileID: 884553160}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &75546161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75546159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8586a47be0b66cd4a84016ff3da4b220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nummer: 0
+  flyttal: 0
+  text: 
+  OnHello:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &75546162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75546159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8586a47be0b66cd4a84016ff3da4b220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nummer: 0
+  flyttal: 0
+  text: 
+  OnHello:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &75546163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75546159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8586a47be0b66cd4a84016ff3da4b220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nummer: 0
+  flyttal: 0
+  text: 
+  OnHello:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &223188646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1732,6 +1810,7 @@ GameObject:
   - component: {fileID: 1561236633}
   - component: {fileID: 1561236634}
   - component: {fileID: 1561236635}
+  - component: {fileID: 1561236636}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1923,6 +2002,18 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: test
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1561236636}
+        m_TargetAssemblyTypeName: hello, Assembly-CSharp
+        m_MethodName: Hello
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -1992,6 +2083,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c722e41023c940945bd107c6ed13ae14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1561236636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561236626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8586a47be0b66cd4a84016ff3da4b220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nummer: 10
+  flyttal: 3.67
+  text: rtry
+  OnHello:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1575442433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9165120810570637169, guid: 31572358dd9c64b43829f6eb6be30f1f, type: 3}
