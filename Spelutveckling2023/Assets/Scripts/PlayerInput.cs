@@ -29,12 +29,15 @@ public class PlayerInput : MonoBehaviour
     public UnityEvent OnJump;
     public UnityEvent OnLand;
 
+    public UnityEvent OnAttack;
+
     // Start is called before the first frame update
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
     }
 
+    // värden för att spara data mellan varje uppdatering, för jämförelser och gradvisa förändringar
     bool wasMoving = false;
     bool wasGrounded = false;
     float targetAngle = 0;
@@ -42,6 +45,13 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // tryck e för att atttackera
+        if (Input.GetKeyDown("e"))
+        {
+            Debug.Log("e");
+            OnAttack.Invoke();
+        }
+
         Vector3 moveDirection = Vector3.zero;
 
         //Basic walk input
@@ -50,16 +60,29 @@ public class PlayerInput : MonoBehaviour
 
         bool isMoving = moveDirection.sqrMagnitude > float.Epsilon;
 
+        // rotera spelaren mot rörelseriktning, bara om den rör sig
+        if (isMoving)
+        {
+            // beräkna vinkel från X/Y riktning
+            float signedAngle = Vector3.SignedAngle(Vector3.forward, moveDirection, Vector3.up);
+            // vänd spelaren gradvis över tid mot den riktningen
+            targetAngle = Mathf.MoveTowards(targetAngle, signedAngle, TurnSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.AngleAxis(targetAngle, Vector3.up);
+        }
 
         //Jump or gravity
         if (_characterController.isGrounded)
         {
             if (isMoving != wasMoving)
             {
+                // sker vid start och stopp
+
                 wasMoving = isMoving;
 
-                if (isMoving) OnMove.Invoke();
-                else OnStop.Invoke();
+                if (isMoving)
+                    OnMove.Invoke();
+                else
+                    OnStop.Invoke();
             }
 
             bool jumped = Input.GetButtonDown("Jump");
@@ -67,27 +90,32 @@ public class PlayerInput : MonoBehaviour
 
             if (!wasGrounded)
             {
+                // sker vid landning
                 wasGrounded = true;
                 OnLand.Invoke();
             }
 
             if (jumped)
             {
-                if(wasMoving) OnStop.Invoke();
+                // sker vid hopp
+                if (wasMoving) OnStop.Invoke();
                 wasGrounded = false;
                 OnJump.Invoke();
             }
         }
         else
         {
+            // uppdatera gravitation
             storedVelocityY -= gravityForce * Time.deltaTime;
         }
 
+        // applicera gravitation
         moveDirection.y = storedVelocityY;
 
         //Apply movement
         _characterController.Move(moveDirection * Time.deltaTime);
 
+        // stäng av spelet med esc
         if (Input.GetButtonDown("Cancel"))
             Application.Quit();
     }
