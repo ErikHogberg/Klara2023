@@ -14,8 +14,17 @@ public class hello : MonoBehaviour
         Hello();
     }
 
-    public void Hello(){
+    public void Hello()
+    {
         Debug.Log("Hello, World!");
         OnHello.Invoke();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("e"))
+        {
+            Hello();
+        }
     }
 }

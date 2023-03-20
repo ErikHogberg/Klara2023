@@ -58,7 +58,7 @@ public class PlayerInput : MonoBehaviour
         moveDirection.x = Input.GetAxis("Horizontal") * walkSpeed;
         moveDirection.z = Input.GetAxis("Vertical") * walkSpeed;
 
-        bool isMoving = moveDirection.sqrMagnitude > float.Epsilon;
+        bool isMoving = moveDirection.magnitude > 0;
 
         // rotera spelaren mot rörelseriktning, bara om den rör sig
         if (isMoving)
